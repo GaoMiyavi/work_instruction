@@ -1,64 +1,65 @@
+23432434
 jenkins.bubi.cn
 (192.168.5.20:9000)
 
 
-1.��ȡ���뵽-->jenkins���ط�����
-2.mvn  (pom.xml) --> war��
-3.(SSH SERVER)--->Զ�̷�����
+1.拉取代码到-->jenkins本地服务器
+2.mvn  (pom.xml) --> war包
+3.(SSH SERVER)--->远程服务器
 4.ssh 22 192.168.5.80 (/data/shell/auto_publish.sh)
 
 
 
-git clone      git��ַ
+git clone      git地址
 
 
-jenkins���������ɹ�Կ��˽Կ
+jenkins服务器生成公钥和私钥
 ssh-keygen   -t rsa
 
- id_rsa      ˽Կ
- id_rsa.pub  ��Կ
- �ѹ�Կ����ȥ
+ id_rsa      私钥
+ id_rsa.pub  公钥
+ 把公钥传过去
  
  
  
-vi   �ļ�
+vi   文件
 
-�л�������  1G
-�л�����β  G
+切换到首行  1G
+切换到行尾  G
 
 
 
-shift  :   ָ����
-shift ^  ����
+shift  :   指定行
+shift ^  行首
 shift $
-i  �༭ģʽ
-esc �鿴ģʽ
-x  һ�����ַ�ɾ��
-dd  ɾ��һ����
+i  编辑模式
+esc 查看模式
+x  一个个字符删除
+dd  删除一整行
 
-�ļ�Ȩ��
+文件权限
 
 -
 -rwx r-x  r-x           rwx=7   rx=5   wx=3
-��   ��   ����
+主   组   其他
 -rw-------.  1 root root       816 Jul 13 18:35 anaconda-ks.cfg
 
-chown  ����(��   �� ����)
+chown  改属(主   组 其他)
 
 chmod  
-��   ��
+主   组
 
 -rw-------.  1 root ntp        816 Jul 13 18:35 anaconda-ks.cfg
 
-root(��д)
-ntp��(û���κ�Ȩ��)
-�����û�(û���κ�Ȩ��)
+root(读写)
+ntp组(没有任何权限)
+其他用户(没有任何权限)
 
 
 -rwx 7   r-x  5    r--.  4     1 root ntp        816 Jul 13 18:35 anaconda-ks.cfg
-root�û�(��дִ��)
-ntp��(����ִ��)
-�����û�(��)
+root用户(读写执行)
+ntp组(读和执行)
+其他用户(读)
 
 
 df  -h
